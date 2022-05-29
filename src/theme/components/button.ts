@@ -9,6 +9,10 @@ const Button: ComponentStyleConfig = {
     _disabled: {
       boxShadow: "0px 2px 2px rgba(23, 25, 26, 0.06)",
     },
+    _focus: {
+      outline: "none",
+      boxShadow: "none",
+    },
   },
   sizes: {
     xs: {
@@ -43,7 +47,7 @@ const Button: ComponentStyleConfig = {
     },
     secondary: {
       bg: "white",
-      color: "primry.500",
+      color: "#0580A4",
       border: "1px solid rgba(5, 128, 164, 0.5)",
       _hover: {
         bg: "linear-gradient(0deg, rgba(5, 128, 164, 0.03), rgba(5, 128, 164, 0.03))",
