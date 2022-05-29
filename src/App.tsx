@@ -1,38 +1,52 @@
-import * as React from "react"
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
   Grid,
-  theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+  GridItem,
+  Hide,
+  useDisclosure,
+} from "@chakra-ui/react";
+import MenuLeft from "components/MenuLeft";
+import MenuRight from "components/MenuRight";
+import Nav from "components/Nav";
+import theme from "theme";
+import "theme/fonts/font.css";
 
-export const App = () => (
-  <ChakraProvider theme={theme}>
-    <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
+export const App = () => {
+  const { isOpen, onToggle } = useDisclosure();
+  return (
+    <ChakraProvider theme={theme}>
+      <Grid
+        h="100vh"
+        templateColumns={{
+          base: "1fr",
+          lg: isOpen ? "180px 1fr 72px" : "80px 1fr 72px",
+          xl: isOpen ? "240px 1fr 72px" : "80px 1fr 72px",
+        }}
+        templateRows={{ base: "1fr", lg: "72px 1fr" }}>
+        <Hide below="lg">
+          <GridItem rowSpan={2} colSpan={1} bg="tertiary">
+            <MenuLeft expanded={isOpen} />
+          </GridItem>
+        </Hide>
+        <Hide below="lg">
+          <GridItem rowSpan={1} colSpan={1} bg="white">
+            <Nav onToggle={onToggle} isOpen={isOpen} />
+          </GridItem>
+        </Hide>
+        <Hide below="lg">
+          <GridItem
+            rowSpan={2}
+            colSpan={1}
+            bg="white"
+            borderLeft="1px solid"
+            borderColor="gray.200">
+            <MenuRight />
+          </GridItem>
+        </Hide>
+        <GridItem rowSpan={1} colSpan={1} bg="gray.50">
+          4
+        </GridItem>
       </Grid>
-    </Box>
-  </ChakraProvider>
-)
+    </ChakraProvider>
+  );
+};
