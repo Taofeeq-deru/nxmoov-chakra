@@ -26,6 +26,7 @@ const Stages: FC<Props> = ({ stage, amount, index }) => {
         marginTop={{ base: "16px", lg: "10px" }}
         overflowY="scroll"
         height="calc(100vh - 440px)"
+        paddingBottom="16px"
         sx={{
           scrollbarWidth: "none",
           "::-webkit-scrollbar": {

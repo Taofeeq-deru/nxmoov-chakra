@@ -8,7 +8,7 @@ import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 
 const MAX_STARS = 5;
 
-const UserInfo: FC<CandidateProps> = ({ name, stars, tag, action }) => {
+const UserInfo: FC<CandidateProps> = ({ name, stars, tag, action, img }) => {
   const renderStars = () => {
     let starsArr = [];
     if (action === "view") {
@@ -41,7 +41,7 @@ const UserInfo: FC<CandidateProps> = ({ name, stars, tag, action }) => {
       flexDirection={{ base: "row", lg: "column" }}
       alignItems={{ base: "flex-start", lg: "center" }}
       gap={{ base: "10px", lg: "12px" }}>
-      <Avatar size={{ base: "sm", lg: "md" }} name={name} />
+      <Avatar size={{ base: "sm", lg: "md" }} name={name} src={img} />
       <Box>
         <Heading
           fontSize="md"
