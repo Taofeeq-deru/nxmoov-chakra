@@ -27,7 +27,7 @@ const Candidate: FC<Props> = ({ candidate }) => {
       bg="white"
       borderRadius="base"
       padding={{ base: "16px", lg: "12px" }}
-      width={{ base: "100vw", md: "300px", lg: "200px" }}>
+      width={{ base: "80vw", md: "300px", lg: "200px" }}>
       <Flex alignItems={{ base: "flex-start", lg: "center" }}>
         <Hide below="lg">
           <Tag
