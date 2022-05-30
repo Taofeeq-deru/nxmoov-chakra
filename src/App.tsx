@@ -5,6 +5,7 @@ import {
   Hide,
   useDisclosure,
 } from "@chakra-ui/react";
+import MainBody from "components/MainBody";
 import MenuLeft from "components/MenuLeft";
 import MenuRight from "components/MenuRight";
 import Nav from "components/Nav";
@@ -44,7 +45,7 @@ export const App = () => {
           </GridItem>
         </Hide>
         <GridItem rowSpan={1} colSpan={1} bg="gray.50">
-          4
+          <MainBody />
         </GridItem>
       </Grid>
     </ChakraProvider>
