@@ -20,7 +20,8 @@ type Props = {
 };
 
 const Candidate: FC<Props> = ({ candidate }) => {
-  const { name, tag, action, stars, timeframe, message, approved } = candidate;
+  const { name, tag, action, stars, timeframe, message, approved, img } =
+    candidate;
   return (
     <Box
       bg="white"
@@ -41,7 +42,13 @@ const Candidate: FC<Props> = ({ candidate }) => {
           </Tag>
         </Hide>
         <Show below="lg">
-          <UserInfo name={name} tag={tag} action={action} stars={stars} />
+          <UserInfo
+            name={name}
+            tag={tag}
+            action={action}
+            stars={stars}
+            img={img}
+          />
         </Show>
         <IconButton
           aria-label="more"
@@ -53,7 +60,13 @@ const Candidate: FC<Props> = ({ candidate }) => {
         />
       </Flex>
       <Hide below="lg">
-        <UserInfo name={name} tag={tag} action={action} stars={stars} />
+        <UserInfo
+          name={name}
+          tag={tag}
+          action={action}
+          stars={stars}
+          img={img}
+        />
         <Flex flexDirection="column" gap="8px" alignItems="center">
           {approved ? (
             <Text

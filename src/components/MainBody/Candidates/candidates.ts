@@ -6,6 +6,7 @@ export type CandidateProps = {
   timeframe?: string;
   message?: string;
   approved?: string;
+  img?: string;
 };
 
 export type StageProps = {
@@ -42,9 +43,27 @@ export const candidates: StageProps[] = [
     stageName: "sourcing",
     color: "#287CC9",
     candidates: [
-      { name: "Miracle Dokidis", tag: "new", action: "view", stars: 0 },
-      { name: "Maren Stanton", tag: "new", action: "view", stars: 0 },
-      { name: "Allison Curtis", tag: "new", action: "view", stars: 0 },
+      {
+        name: "Miracle Dokidis",
+        tag: "new",
+        action: "view",
+        stars: 0,
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913641/Rectangle_222_vedmws.png",
+      },
+      {
+        name: "Maren Stanton",
+        tag: "new",
+        action: "view",
+        stars: 0,
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913641/Rectangle_222_vedmws.png",
+      },
+      {
+        name: "Allison Curtis",
+        tag: "new",
+        action: "view",
+        stars: 0,
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913641/Rectangle_224_bmp1de.png",
+      },
       { name: "Allison Stanton", tag: "new", action: "view", stars: 0 },
       { name: "Miracle Stanton", tag: "new", action: "view", stars: 0 },
     ],
@@ -59,6 +78,7 @@ export const candidates: StageProps[] = [
         stars: 3,
         timeframe: "2 days ago",
         action: "call",
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913641/Rectangle_223_1_bm98mj.png",
       },
       {
         name: "Eric Bana",
@@ -66,6 +86,7 @@ export const candidates: StageProps[] = [
         stars: 3,
         timeframe: "2 days ago",
         action: "call",
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913641/Rectangle_223_uf786l.png",
       },
     ],
   },
@@ -80,6 +101,7 @@ export const candidates: StageProps[] = [
         timeframe: "2 days ago",
         approved: "true",
         message: "Challenge Sent",
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913641/Rectangle_222_vedmws.png",
       },
       {
         name: "Devin Townsend",
@@ -88,6 +110,7 @@ export const candidates: StageProps[] = [
         timeframe: "2 days ago",
         approved: "false",
         message: "Disqualified",
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913751/Rectangle_224_2_i7meyd.png",
       },
     ],
   },
@@ -101,6 +124,7 @@ export const candidates: StageProps[] = [
         stars: 3,
         timeframe: "2 days ago",
         action: "call",
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913737/Rectangle_224_1_mpwa0r.png",
       },
       {
         name: "Kevin Lee",
@@ -109,6 +133,7 @@ export const candidates: StageProps[] = [
         timeframe: "2 days ago",
         approved: "false",
         message: "Disqualified",
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913641/Rectangle_223_uf786l.png",
       },
     ],
   },
@@ -123,6 +148,7 @@ export const candidates: StageProps[] = [
         timeframe: "2 days ago",
         approved: "true",
         message: "Test Scheduled",
+        img: "https://res.cloudinary.com/taofeeq/image/upload/v1653913753/Rectangle_223_2_uv7llu.png",
       },
     ],
   },
