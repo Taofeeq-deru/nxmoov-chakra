@@ -134,3 +134,14 @@ export const SearchIcon = (props?: any) => (
     />
   </Icon>
 );
+
+export const SubMenuIcon = (props?: any) => (
+  <Icon width="8px" height="13px" viewBox="0 0 8 13" {...props}>
+    <rect width="2.4" height="2.4" fill="#C0C9CC" />
+    <rect y="4.80078" width="2.4" height="2.4" fill="#C0C9CC" />
+    <rect y="9.60156" width="2.4" height="2.4" fill="#C0C9CC" />
+    <rect x="5.39844" width="2.4" height="2.4" fill="#C0C9CC" />
+    <rect x="5.39844" y="4.80078" width="2.4" height="2.4" fill="#C0C9CC" />
+    <rect x="5.39844" y="9.60156" width="2.4" height="2.4" fill="#C0C9CC" />
+  </Icon>
+);

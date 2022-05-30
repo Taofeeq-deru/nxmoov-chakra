@@ -1,68 +1,47 @@
-import {
-  Badge,
-  Box,
-  Flex,
-  Heading,
-  Hide,
-  Icon,
-  IconButton,
-  Show,
-} from "@chakra-ui/react";
-import { IoIosArrowDown, IoIosMore } from "react-icons/io";
+import { Button, Flex, Progress, Show } from "@chakra-ui/react";
+import { FC } from "react";
+import { IoIosAdd } from "react-icons/io";
+import { StageProps } from "../candidates";
 import Candidate from "./Candidate";
+import StageName from "./StageName";
 
-const Stages = () => {
+type Props = {
+  stage: StageProps;
+  amount: number;
+  index: number;
+};
+
+const Stages: FC<Props> = ({ stage, amount, index }) => {
+  const { stageName, color, candidates } = stage;
+  const progress = Math.round(((index + 1) / amount) * 100);
   return (
-    <Flex flexDirection="column">
-      <Box
-        background={{ lg: "white" }}
-        textAlign={{ base: "center", lg: "left" }}
-        padding={{ base: "8px 12px", lg: "14px 12px" }}
-        borderRadius={{ lg: "0 0 4px 4px" }}
-        borderBottom={{ lg: "4px solid" }}
-        width="200px"
-        borderColor="#287CC9">
-        <Flex
-          width="100%"
-          justifyContent={{ base: "center", lg: "flex-start" }}
-          alignItems="center"
-          gap={{ base: "11px", lg: "8px" }}>
-          <Heading
-            fontSize={{ base: "md", lg: "sm" }}
-            color="gray.900"
-            fontWeight="500">
-            Sourcing
-          </Heading>
-          <Show below="lg">
-            <Icon ml="1px" as={IoIosArrowDown} color="gray.500" />
-          </Show>
-          <Hide below="lg">
-            <Badge
-              fontSize="sm"
-              color="gray.900"
-              bg="#EEEEF0"
-              fontFamily="sans-serif"
-              textAlign="center"
-              p="1px 4px">
-              13
-            </Badge>
-            <IconButton
-              aria-label="more"
-              marginLeft="auto"
-              variant="ghost"
-              boxShadow="none"
-              height="unset"
-              icon={<IoIosMore fill="gray.500" />}
-            />
-          </Hide>
-        </Flex>
-      </Box>
-      <Show below="lg">Progress</Show>
+    <Flex flexDirection="column" key={index}>
+      <StageName stageName={stageName} candidates={candidates} color={color} />
+      <Show below="lg">
+        <Progress hasStripe value={progress} />
+      </Show>
       <Flex
         flexDirection="column"
         gap={{ base: "12px", lg: "16px" }}
-        marginTop={{ base: "16px", lg: "10px" }}>
-        <Candidate />
+        marginTop={{ base: "16px", lg: "10px" }}
+        overflowY="scroll"
+        height="calc(100vh - 440px)"
+        sx={{
+          scrollbarWidth: "none",
+          "::-webkit-scrollbar": {
+            display: "none",
+          },
+        }}>
+        {candidates?.map((candidate, i) => (
+          <Candidate candidate={candidate} key={i} />
+        ))}
+        <Button
+          leftIcon={<IoIosAdd stroke="gray.500" />}
+          variant="tertiary"
+          width={{ base: "100%", md: "300px", lg: "200px" }}
+          size="sm">
+          Add Candidate
+        </Button>
       </Flex>
     </Flex>
   );
