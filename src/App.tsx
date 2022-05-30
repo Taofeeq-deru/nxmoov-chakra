@@ -1,19 +1,30 @@
+import { useState } from "react";
 import {
   ChakraProvider,
   Grid,
   GridItem,
   Hide,
+  Show,
   useDisclosure,
 } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 import MainBody from "components/MainBody";
 import MenuLeft from "components/MenuLeft";
 import MenuRight from "components/MenuRight";
 import Nav from "components/Nav";
+import Sidebar from "components/Sidebar";
 import theme from "theme";
 import "theme/fonts/font.css";
+import "App.css";
 
 export const App = () => {
   const { isOpen, onToggle } = useDisclosure();
+  const {
+    getButtonProps,
+    getDisclosureProps,
+    isOpen: sideOpen,
+  } = useDisclosure();
+  const [hidden, setHidden] = useState(!sideOpen);
   return (
     <ChakraProvider theme={theme}>
       <Grid
@@ -44,8 +55,32 @@ export const App = () => {
             <MenuRight />
           </GridItem>
         </Hide>
-        <GridItem rowSpan={1} colSpan={1} bg="gray.50">
-          <MainBody />
+        <GridItem display="flex" rowSpan={1} colSpan={1} bg="gray.50">
+          <Hide below="lg">
+            <Sidebar {...{ getButtonProps, sideOpen }} />
+          </Hide>
+          <Show below="lg">
+            <motion.div
+              {...getDisclosureProps()}
+              hidden={hidden}
+              initial={false}
+              onAnimationStart={() => setHidden(false)}
+              onAnimationComplete={() => setHidden(!sideOpen)}
+              animate={{ width: sideOpen ? "100vw" : 0 }}
+              style={{
+                background: "rgba(2, 7, 18, 0.6)",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                position: "absolute",
+                left: "0",
+                height: "100vh",
+                top: "0",
+                zIndex: 999,
+              }}>
+              <Sidebar {...{ getButtonProps, sideOpen }} />
+            </motion.div>
+          </Show>
+          <MainBody getButtonProps={getButtonProps} />
         </GridItem>
       </Grid>
     </ChakraProvider>

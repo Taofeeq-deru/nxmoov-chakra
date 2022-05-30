@@ -11,6 +11,7 @@ import {
   Show,
   Text,
 } from "@chakra-ui/react";
+import { FC } from "react";
 import {
   IoIosArrowDown,
   IoIosArrowForward,
@@ -22,12 +23,16 @@ import {
   IoIosTime,
 } from "react-icons/io";
 
-const Header = () => {
+type Props = {
+  getButtonProps: (e?: any) => any;
+};
+
+const Header: FC<Props> = ({ getButtonProps }) => {
   return (
     <Flex
       flexDirection={{ base: "row", lg: "column" }}
       alignItems={{ base: "flex-start", lg: "unset" }}
-      width="100%"
+      width={{ base: "100vw", lg: "100%" }}
       padding={{ base: "30px 38px 16px 21px", lg: "0 48px 32px 0" }}
       bg={{ base: "white", lg: "transparent" }}>
       <Show below="lg">
@@ -41,6 +46,7 @@ const Header = () => {
           isRound
           icon={<IoIosArrowForward fill="gray.500" />}
           marginRight="16px"
+          {...getButtonProps()}
         />
       </Show>
       <Box>

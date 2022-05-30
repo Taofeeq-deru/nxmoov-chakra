@@ -1,7 +1,5 @@
 import {
   Box,
-  Button,
-  Collapse,
   Flex,
   Hide,
   Icon,
@@ -9,39 +7,41 @@ import {
   Show,
   Tag,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
-import {
-  IoIosArrowDown,
-  IoIosMore,
-  IoMdEye,
-  IoMdThumbsDown,
-  IoMdThumbsUp,
-} from "react-icons/io";
+import { FC } from "react";
+import { IoIosMore, IoMdThumbsDown, IoMdThumbsUp } from "react-icons/io";
+import { CandidateProps, tagColors } from "../../candidates";
+import PhoneScreen from "./PhoneScreen";
 import UserInfo from "./UserInfo";
+import ViewCandidate from "./ViewCandidate";
 
-const Candidate = () => {
-  const { isOpen, onToggle } = useDisclosure();
+type Props = {
+  candidate: CandidateProps;
+};
+
+const Candidate: FC<Props> = ({ candidate }) => {
+  const { name, tag, action, stars, timeframe, message, approved } = candidate;
   return (
     <Box
       bg="white"
+      borderRadius="base"
       padding={{ base: "16px", lg: "12px" }}
-      width={{ base: "100%", lg: "200px" }}>
+      width={{ base: "100vw", md: "300px", lg: "200px" }}>
       <Flex alignItems={{ base: "flex-start", lg: "center" }}>
         <Hide below="lg">
           <Tag
-            color="white"
+            color={tagColors?.[tag]?.color}
             fontSize="xs"
-            bg="#3E6EEB"
+            bg={tagColors?.[tag]?.bg}
             border="1px solid"
-            borderColor="rgba(15, 49, 139, 0.2)"
+            borderColor={tagColors?.[tag]?.border}
             px="8px"
             textTransform="capitalize">
-            New
+            {tag}
           </Tag>
         </Hide>
         <Show below="lg">
-          <UserInfo />
+          <UserInfo name={name} tag={tag} action={action} stars={stars} />
         </Show>
         <IconButton
           aria-label="more"
@@ -53,75 +53,44 @@ const Candidate = () => {
         />
       </Flex>
       <Hide below="lg">
-        <UserInfo />
+        <UserInfo name={name} tag={tag} action={action} stars={stars} />
         <Flex flexDirection="column" gap="8px" alignItems="center">
-          <Text fontSize="xs" color="green.900">
-            Challenge Sent
-          </Text>
-          <Text fontSize="xs" color="gray.900">
-            2 days ago
-          </Text>
-          <Flex
-            alignItems="center"
-            justifyContent="center"
-            width="36px"
-            height="36px"
-            borderRadius="100%"
-            background="#E9FAF2">
-            <Icon
-              as={IoMdThumbsUp}
-              color="green.500"
-              width="24px"
-              height="24px"
-            />
-          </Flex>
+          {approved ? (
+            <Text
+              fontSize="xs"
+              color={approved === "true" ? "green.900" : "red.900"}
+              casing="capitalize">
+              {message}
+            </Text>
+          ) : null}
+          {timeframe ? (
+            <Text fontSize="xs" color="gray.900">
+              {timeframe}
+            </Text>
+          ) : null}
+          {approved ? (
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              width="36px"
+              height="36px"
+              borderRadius="100%"
+              background={approved === "true" ? "green.100" : "red.100"}>
+              <Icon
+                as={approved === "true" ? IoMdThumbsUp : IoMdThumbsDown}
+                color={approved === "true" ? "green.500" : "red.500"}
+                width="24px"
+                height="24px"
+              />
+            </Flex>
+          ) : null}
         </Flex>
       </Hide>
-      <Flex
-        marginTop="12px"
-        bg="gray.50"
-        borderRadius="base"
-        py="12px"
-        flexDirection="column"
-        alignItems="center"
-        gap="12px">
-        <Flex alignItems="center" justifyContent="center" cursor="pointer">
-          <Text color="gray.900" fontSize="sm" onClick={onToggle}>
-            Phone screen?
-          </Text>
-          <Icon ml="1px" as={IoIosArrowDown} color="gray.500" />
-        </Flex>
-        <Collapse in={isOpen} animateOpacity>
-          <Flex flexDirection="row" gap="12px">
-            <IconButton
-              aria-label="thumbs down"
-              width="36px"
-              height="36px"
-              borderRadius="100%"
-              variant="outline"
-              colorScheme="gray.400"
-              icon={<IoMdThumbsDown />}
-            />
-            <IconButton
-              aria-label="thumbs up"
-              width="36px"
-              height="36px"
-              borderRadius="100%"
-              variant="outline"
-              colorScheme="gray.400"
-              icon={<IoMdThumbsUp />}
-            />
-          </Flex>
-        </Collapse>
-      </Flex>
-      <Button
-        marginTop="12px"
-        width={{ base: "100%", lg: "unset" }}
-        leftIcon={<IoMdEye />}
-        variant="tertiary"
-        size="sm">
-        View Candidate
-      </Button>
+      {action === "view" ? (
+        <ViewCandidate />
+      ) : action === "call" ? (
+        <PhoneScreen />
+      ) : null}
     </Box>
   );
 };

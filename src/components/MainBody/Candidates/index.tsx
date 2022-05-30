@@ -1,20 +1,26 @@
 import {
-  Box,
   Center,
   Divider,
   Flex,
+  Grid,
+  GridItem,
   Hide,
   Icon,
   IconButton,
   Text,
 } from "@chakra-ui/react";
 import { IoIosList, IoMdMenu, IoMdPeople } from "react-icons/io";
+import { candidates } from "./candidates";
 import Stages from "./Stages";
 
 const Candidates = () => {
   return (
-    <Box padding={{ base: "16px 24px 0", lg: "26px 0 0" }}>
-      <Flex alignItems="center" marginBottom={{ base: "16px", lg: "26px" }}>
+    <Grid
+      padding={{ base: "16px 24px 8px", lg: "26px 0 8px" }}
+      templateColumns={"1fr"}
+      templateRows={"40px 1fr"}
+      rowGap={{ base: "16px", lg: "26px" }}>
+      <GridItem display="flex" alignItems="center" colSpan={1} rowSpan={1}>
         <Flex alignItems="center" gap="8px">
           <Text fontSize="md" color="gray.900" fontWeight="500">
             22 Candidates
@@ -42,9 +48,28 @@ const Candidates = () => {
             <Icon as={IoIosList} color="gray.500" />
           </Flex>
         </Hide>
-      </Flex>
-      <Stages />
-    </Box>
+      </GridItem>
+      <GridItem
+        colSpan={1}
+        rowSpan={1}
+        gap="12px"
+        overflowX="scroll"
+        overflowY="hidden"
+        display="flex"
+        flexDirection="row"
+        width="100%">
+        {candidates?.map((stage, i) => (
+          <Flex gap="12px" key={i} height="inherit">
+            <Stages stage={stage} amount={candidates?.length} index={i} />
+            {i === candidates?.length - 1 ? null : (
+              <Hide below="lg">
+                <Divider orientation="vertical" />
+              </Hide>
+            )}
+          </Flex>
+        ))}
+      </GridItem>
+    </Grid>
   );
 };
 
