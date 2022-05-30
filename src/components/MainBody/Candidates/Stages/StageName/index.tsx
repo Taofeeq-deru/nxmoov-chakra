@@ -20,7 +20,7 @@ const StageName: FC<StageProps> = ({ stageName, candidates, color }) => {
       padding={{ base: "8px 12px", lg: "14px 12px" }}
       borderRadius={{ lg: "base" }}
       borderBottom={{ lg: `4px solid ${color}` }}
-      width={{ base: "100vw", md: "300px", lg: "200px" }}>
+      width={{ base: "80vw", md: "300px", lg: "200px" }}>
       <Flex
         width="100%"
         justifyContent={{ base: "center", lg: "flex-start" }}
